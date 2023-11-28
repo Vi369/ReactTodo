@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import TodoContext from '../../context/TodoContext';
 
-function AddTodo({addTodos}) {
+function AddTodo() {
+  const {todos, setTodos}= useContext(TodoContext);
   const [todoText, setTodoText] = useState('');
   return (
     <>
@@ -13,7 +15,8 @@ function AddTodo({addTodos}) {
         {/* {console.log(todoText)} */}
         <button onClick={ ()=>{
           // console.log("clicked")
-          addTodos(todoText)
+          let nextId = todos.length + 1;
+          setTodos([...todos, {id: nextId, text: todoText, isComplete: false}]);
           setTodoText('');
         }}>
           Add
